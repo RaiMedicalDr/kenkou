@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>健康管理WEBAPP</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- iOS ホーム追加と全画面表示 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="健康報告">
+
+<!-- iOSアイコン（例） -->
+<link rel="apple-touch-icon" href="スクリーンショット 2025-06-25 17.52.57.png">
+
+<!-- Android用Manifest -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#003366">
+</head>
+<style>
+/* =====================
+   Glassmorphism Theme for 健康管理WEBAPP (Responsive Adjustments)
+===================== */
+
+/* Body and Background */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, rgba(224,247,250,1) 0%, rgba(252,228,236,1) 100%);
+  font-family: "MS Gothic", "メイリオ", sans-serif;
+  font-size: 14px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Universal Glass Panel */
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Header */
+header {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  background: rgba(0, 51, 102, 0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  width: 100%;              /* Full width to fit device */
+  max-width: 960px;         /* Cap for larger screens */
+  margin: 20px auto;        /* Center with top/bottom space */
+  padding: 20px;            /* Inner spacing */
+  min-height: calc(100vh - 100px);
+  background-color: rgba(255,255,255,0.15);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+/* Navigation */
+nav {
+  width: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-right: 20px;
+}
+
+nav a {
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  color: #003366;
+  font-weight: 500;
+}
+
+nav a:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* Content Boxes */
+.box {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Headings */
+h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #003366;
+}
+
+/* Buttons */
+button {
+  padding: 8px 20px;
+  border: none;
+  background: rgba(0, 51, 102, 0.6);
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: rgba(0, 51, 102, 0.8);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  color: #333;
+}
+
+th {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Clock and Calendar */
+.clock-box,
+.calendar-box {
+  margin-top: 20px;
+}
+
+.clock-display {
+  background: rgba(0,0,0,0.6);
+  color: #0f0;
+  padding: 10px;
+  border-radius: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+}
+
+.calendar-table th,
+.calendar-table td {
+  padding: 6px;
+  border: none;
+}
+
+.calendar-table td.weekend {
+  color: #e57373;
+}
+
+/* News Ticker */
+.news-ticker {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.ticker-text {
+  padding: 10px;
+  white-space: nowrap;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 12px;
+  color: #666;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Responsive: iOS and Mobile */
+@media (max-width: 768px) {
+  header {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .container {
+    flex-direction: column;
+    width: calc(100% - 20px); /* Full width minus side margins */
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5px;
+    background-color: transparent;
+    margin-right: 0;
+  }
+
+  nav a {
+    flex: 1 1 45%;
+    margin: 5px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  .box {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .clock-display {
+    font-size: 14px;
+    width: 80px;
+    padding: 5px;
+  }
+
+  .calendar-table th,
+  .calendar-table td {
+    font-size: 10px;
+    padding: 2px;
+  }
+}
+
+/* Emergency Button Styling */
+#emergencyBtn {
+  width: 100%;
+  max-width: 280px;
+  padding: 14px 0;
+  margin: 30px auto;
+  display: block;
+  background: rgba(255, 0, 0, 0.3);
+  border: 2px solid rgba(255, 0, 0, 0.7);
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+  opacity: 0.6;
+  text-align: center;
+}
+
+#emergencyBtn.armed {
+  background: rgba(255, 0, 0, 0.85);
+  border-color: rgba(255, 0, 0, 1);
+  cursor: pointer;
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+#emergencyBtn.armed:hover {
+  transform: scale(1.1);
+}
+</style>
+<body>
+
+  <header class="speakable">ダッシュボード健康管理</header>
+
+</div>
+  <div class="container">
+
+    <nav>
+      <a class="speakable" href="index.html">ホーム(このページ）</a>
+      <a class="speakable" href="tyuu1.html">NOCOMIY</a>
+      <a class="speakable" href="tyuu2.html">TOMMY</a>
+      <a class="speakable" href="tyuu3.html">RAIA</a>
+      <a class="speakable" href="famiriymemo.html">家族メモ</a>
+      <a class="speakable" href="calendar.html">カレンダー</a>
+      <a class="speakable" href="otoiawase.html">異常報告</a>
+      <a class="speakable" href="#">利用規約</a>
+      <a class="speakable" href="#">プライバシーポリシー</a>
+      <button id="emergencyBtn" class="glass">緊急モード</button>
+      
+      
+
+
+
+  <footer>&copy; 2025 ヒコネズミテクノロジーズ</footer>
+
+  
+</body>
+
+
+<script>
+  (function() {
+    const emergencyNumber = '119';  // 例: 080-****-**** // 日本の119（消防／救急）。警察なら'110'に変更
+    const btn = document.getElementById('emergencyBtn');
+    let armed = false;
+    let timer = null;
+
+    btn.addEventListener('click', () => {
+      if (!armed) {
+        // 一度目のタップ：発信モードにアーム
+        armed = true;
+        btn.textContent = '確認：もう一度タップで通報';
+        btn.style.background = 'rgba(255,0,0,0.6)';  // 強調カラー
+        // 3秒以内に再タップなければリセット
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          armed = false;
+          btn.textContent = '緊急モード';
+          btn.style.background = '';  // 元のスタイルに戻す
+        }, 3000);
+      } else {
+        // 二度目のタップ：電話アプリを起動
+        window.location.href = `tel:${emergencyNumber}`;
+      }
+    });
+  })();
+</script>
+
+
+</html>
+
